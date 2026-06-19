@@ -7,7 +7,7 @@ It is not the most efficient way to run it, but it does work. Please help modify
 - I use 'yourname' to present the user name.
 
 ## Preparation:
-1. Have a **work folder** where you run the pipeline in (e.g., /lustre09/project/6070433/peixiliu/Nanopore/Batch1)
+1. Have a **work folder** where you run the pipeline in (e.g., /lustre09/project/6070433/yourname/Nanopore/Batch1)
 2. Have a [samples.csv](samples.csv) in the work folder
 3. Have a [configuration file](epi2me_rorqual.config) in the work folder
 
