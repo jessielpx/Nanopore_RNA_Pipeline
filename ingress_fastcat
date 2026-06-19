@@ -1,0 +1,32 @@
+process fastcat {
+    label "ingress"
+    label "wf_common"
+    cpus 1
+    memory "2 GB"
+  
+    input:
+        tuple val(meta), path(input_src, stageAs: "input_src")
+        val fcargs
+        val src
+
+    output:
+        tuple val(meta),
+              path("fastq_chunks/*.fastq.gz"),
+              path("fastcat_stats")
+  
+    script:
+        def manual_root = "/lustre09/project/6070433/yourname/Nanopore/Batch1/fastcat_out"
+        def barcode = meta.barcode
+
+        """
+        set -euo pipefail
+        
+        mkdir -p fastcat_stats fastq_chunks
+
+        cp -av "${manual_root}/${barcode}/fastcat_stats/." fastcat_stats/
+        cp -av "${manual_root}/${barcode}/fastq_chunks/"*.fastq.gz fastq_chunks/
+
+        test -f fastcat_stats/per-file-stats.tsv
+        ls fastq_chunks/*.fastq.gz >/dev/null
+        """
+}
