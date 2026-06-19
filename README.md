@@ -5,6 +5,7 @@ Batch 1 is used as an example.
 **Preparation**:
 1. Have a **work folder** where you run the pipeline in
 2. Have a **sample.csv** in the work folder
+3. Have **epi2me_rorqual.config** in the work folder
 
 **Run PycoQC for quality check**:
 1. sbatch PycoQC_batch1.sh
@@ -15,4 +16,9 @@ Batch 1 is used as an example.
 The epi2me transcriptomic workflow cannot be run smoothly on Rorqual; a specific step needs to be done separately.
 
 **Run Fastcat independently**:
-1. 
+1. sbatch fastcat.sh
+
+**Fix the code**:
+1. nano ~/.nextflow/assets/epi2me-labs/wf-transcriptomes/lib/ingress.nf
+2. Find process fastcat{}
+3. Replace it with the code in ingress_fastcat
