@@ -4,7 +4,7 @@ Batch 1 is used as an example.
 
 **Preparation**:
 1. Have a **work folder** where you run the pipeline in
-2. Have a **sample.csv** in the work folder
+2. Have a [sample.csv](sample.csv) in the work folder
 3. Have **epi2me_rorqual.config** in the work folder
 
 **Run PycoQC for quality check**:
