@@ -4,7 +4,7 @@ It is not the most efficient way to run it, but it does work. Please help modify
 
 #### Notes
 - Batch 1 is used as an example.
-- I use 'yourname' to present the user name.
+- I use 'yourname' to represent the user name.
 
 ## Preparation:
 1. Have a **work folder** where you run the pipeline in (e.g., /lustre09/project/6070433/yourname/Nanopore/Batch1)
