@@ -1,0 +1,65 @@
+process makeReport {
+
+    label "wf_common"
+    cpus 2
+    memory "4 GB"
+    publishDir "${params.out_dir}", mode: 'copy', pattern: "wf-transcriptomes-report.html"
+    input:
+	val metadata
+        path stats, stageAs: "stats_*"
+        path versions
+        val wf_version
+        path "params.json"
+        path "transcriptome_aln_stats/*"
+        path pychopper, stageAs: "pychopper_report/*"
+        path aln_stats, stageAs: "aln_stats/stats_??/*"
+        path gffcmp_dir, stageAs: "gffcmp_dir/*"
+        path gff_annotation, stageAs: "gff_annotation/*"
+        path de_report, stageAs: "de_report/*"
+        path isoforms_table, stageAs: "isoforms_table/*"
+        path transcriptome_summary, stageAs: "transcriptome_summary/summary_*.pkl"
+
+    output:
+	path ("wf-transcriptomes-*.html"), emit: report
+        path ("results_dge.tsv"), emit: results_dge, optional: true
+        path ("unfiltered_tpm_transcript_counts.tsv"), emit: tpm, optional: true
+        path ("unfiltered_transcript_counts_with_genes.tsv"), emit: unfiltered, optional: true
+        path ("filtered_transcript_counts_with_genes.tsv"), emit: filtered, optional: true
+        path ("all_gene_counts.tsv"), emit: gene_counts, optional: true
+    script:
+	String report_name = "wf-transcriptomes-report.html"
+        String metadata = new JsonBuilder(metadata).toPrettyString()
+        String gff_opts = gff_annotation.fileName.name == OPTIONAL_FILE.name ? "" :  "--gff_annotation gff_annotation/"
+        String de_report_opts = de_report.fileName.name == OPTIONAL_FILE.name ? "" : "--de_report de_report/ --de_stats transcriptome_aln_stats/"
+        String gffcmp_opts = gffcmp_dir.fileName.name == OPTIONAL_FILE.name  ? "" :  "--gffcompare_dir gffcmp_dir/"
+        String aln_stats_opts = ""
+        String pychop_opts = pychopper.fileName.name == OPTIONAL_FILE.name ? "" :  "--pychop_report pychopper_report/"
+        String iso_table_opts = isoforms_table.fileName.name == OPTIONAL_FILE.name ? "" :  "--isoform_table isoforms_table/"
+        String tr_summary_opts = transcriptome_summary.fileName.name == OPTIONAL_FILE.name ? "" :  "--transcriptome_summary transcriptome_summary/"
+    """
+    echo '${metadata}' > metadata.json
+    mkdir -p aln_stats_flat
+    i=0
+    find aln_stats -type f -name "*_read_aln_stats.tsv" | sort | while read f; do
+        i=\$((i+1))
+        base=\$(basename "\$f" _read_aln_stats.tsv)
+        cp "\$f" "aln_stats_flat/\${base}_\${i}_read_aln_stats.tsv"
+    done
+
+    workflow-glue report \
+        --report $report_name \
+        --versions $versions \
+        --wf_version $wf_version \
+        --params params.json \
+        $aln_stats_opts \
+        $pychop_opts \
+        --stats $stats \
+        --metadata metadata.json \
+        $gff_opts \
+        $iso_table_opts \
+        $gffcmp_opts \
+        --isoform_table_nrows ${params.isoform_table_nrows} \
+        $de_report_opts \
+        $tr_summary_opts
+    """
+}
