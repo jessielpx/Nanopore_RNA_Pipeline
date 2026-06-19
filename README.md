@@ -18,7 +18,15 @@ The epi2me transcriptomic workflow cannot be run smoothly on Rorqual; a specific
 **Run Fastcat independently**:
 1. sbatch fastcat.sh
 
-**Fix the code**:
+**Fix the code 1**:
 1. nano ~/.nextflow/assets/epi2me-labs/wf-transcriptomes/lib/ingress.nf
 2. Find process fastcat{}
 3. Replace it with the code in ingress_fastcat
+
+**Fix the code 2**: 
+1. nano ~/.nextflow/assets/epi2me-labs/wf-transcriptomes/main.nf
+2. Find process makeReport {}
+3. Replace it with the code in main_make_report
+
+**Resume epi2me**: 
+1. sbatch epi2me.sh
