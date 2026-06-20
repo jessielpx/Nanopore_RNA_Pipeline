@@ -1,4 +1,4 @@
-# Nanopore RNA-seq Pipeline on Rorqual
+# Nanopore RNA-seq Pipeline on Rorqual🐋
 
 #### Hi labmates, 
 This repository documents how I currently run the Nanopore RNA-seq pipeline on Rorqual.
@@ -57,7 +57,7 @@ _**Issue**: The EPI2ME workflow assumes a **Singularity**-based container enviro
 ## 3.5. Modify nextflow scripts:
 **First**
 1. nano ~/.nextflow/assets/epi2me-labs/wf-transcriptomes/lib/ingress.nf
-2. Find **process fastcat{...}**
+2. Find **process fastcat {...}**
 3. Replace it with the script in [ingress_fastcat](ingress_fastcat)
 
 **Second**
