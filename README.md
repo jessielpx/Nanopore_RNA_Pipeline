@@ -1,3 +1,5 @@
+# Nanopore RNA-seq Pipeline on Rorqual
+
 #### Hi labmates, 
 This repository documents how I currently run the Nanopore RNA-seq pipeline on Rorqual.
 It is not the most efficient way to run it, but it does work. Please help modify the workflow :)
@@ -59,3 +61,5 @@ It is not the most efficient way to run it, but it does work. Please help modify
 
 ## 4. Resume epi2me: 
 1. sbatch [epi2me.sh](epi2me.sh)
+
+## To be continued...
