@@ -1,6 +1,21 @@
 #### Hi labmates, 
-This workflow shows how I run the RNA-seq pipeline for Nanopore data on Rorqual.
+This repository documents how I currently run the Nanopore RNA-seq pipeline on Rorqual.
 It is not the most efficient way to run it, but it does work. Please help modify the workflow :)
+
+## Workflow 
+1. Run PycoQC for quality check
+**Differential Gene Expression**: 
+3. Launch the EPI2ME transcriptome workflow
+4. Run Fastcat separately
+5. Resume the EPI2ME workflow
+**Isoform switch**:
+7. IsoformSwitchAnalyzeR (to do)
+**Gene fusion**: 
+9. JAFFAL (to do)
+**Visualization**:
+(to do)
+
+--------------------------------------
 
 #### Notes
 - Batch 1 is used as an example.
