@@ -10,9 +10,9 @@ It is not the most efficient way to run it, but it does work. Please help modify
 
 **Differential Gene Expression**: 
 
-2. Launch the EPI2ME transcriptome workflow
+2. Launch the [EPI2ME transcriptome](https://github.com/epi2me-labs/wf-transcriptomes) workflow
 
-3. Run Fastcat separately
+3. Run [Fastcat](https://github.com/epi2me-labs/fastcat) separately
 
 4. Resume the EPI2ME workflow
 
