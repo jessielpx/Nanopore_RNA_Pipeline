@@ -43,9 +43,13 @@ It is not the most efficient way to run it, but it does work. Please help modify
 ## 2. Run Epi2me (First run):
 1. sbatch [epi2me.sh](epi2me.sh) and wait for it to fail
 
+---
+
 ***The epi2me transcriptomic workflow cannot be finished in a single pass on Rorqual. Fastcat needs to be done separately. I run fastcat separately then put the output back into pipeline and resume. If there is an easier way to fix the issue, please let me know!***
 
 ***Issue: The EPI2ME workflow assumes a Singularity-based container environment, while Rorqual uses Apptainer, resulting in several compatibility issues that require manual fixes.***
+
+---
 
 ## 3. Run Fastcat:
 1. sbatch [fastcat.sh](fastcat.sh)
