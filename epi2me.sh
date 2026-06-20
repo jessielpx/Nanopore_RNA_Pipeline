@@ -25,7 +25,7 @@ export NXF_ANSI_LOG=false
 export NXF_DOCKER_ENABLED=false
 
 # ---- Shared container cache (project) ----
-export NXF_SINGULARITY_CACHEDIR=/project/def-lefranco/peixiliu/NXF_SINGULARITY_CACHEDIR
+export NXF_SINGULARITY_CACHEDIR=/project/def-lefranco/yourname/NXF_SINGULARITY_CACHEDIR
 mkdir -p "$NXF_SINGULARITY_CACHEDIR"
 export APPTAINER_CACHEDIR="$NXF_SINGULARITY_CACHEDIR"
 
