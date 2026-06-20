@@ -48,16 +48,16 @@ It is not the most efficient way to run it, but it does work. Please help modify
 ## 3. Run Fastcat:
 1. sbatch [fastcat.sh](fastcat.sh)
 
-## 3.5. Fix the code:
+## 3.5. Modify nextflow scripts:
 **First**
 1. nano ~/.nextflow/assets/epi2me-labs/wf-transcriptomes/lib/ingress.nf
 2. Find **process fastcat{...}**
-3. Replace it with the code in [ingress_fastcat](ingress_fastcat)
+3. Replace it with the script in [ingress_fastcat](ingress_fastcat)
 
 **Second**
 1. nano ~/.nextflow/assets/epi2me-labs/wf-transcriptomes/main.nf
 2. Find **process makeReport {...}**
-3. Replace it with the code in [main_make_report](main_make_report)
+3. Replace it with the script in [main_make_report](main_make_report)
 
 ## 4. Resume epi2me: 
 1. sbatch [epi2me.sh](epi2me.sh)
