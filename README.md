@@ -34,7 +34,7 @@ It is not the most efficient way to run it, but it does work. Please help modify
 
 ## 0. Preparation:
 1. Have a **work folder** where you run the pipeline in (e.g., /lustre09/project/6070433/yourname/Nanopore/Batch1)
-2. Have a [samples.csv](samples.csv) in the work folder
+2. Have a [samples.csv](samples.csv) in the work folder, the .csv file needs to be comma-delimited
 3. Have a [configuration file](epi2me_rorqual.config) in the work folder
 
 ## 1. Run PycoQC for quality check:
