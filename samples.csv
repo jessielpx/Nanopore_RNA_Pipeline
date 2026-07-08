@@ -1,13 +1,13 @@
 ﻿barcode,alias,condition
 barcode01,sample20,HR
 barcode02,sample27,HR
-barcode03,sample74,LR
+barcode03,sample74,control
 barcode04,sample83A,HR
 barcode05,sample89,HR
 barcode06,sample92,HR
-barcode07,sample102,LR
+barcode07,sample102,control
 barcode08,sample103,HR
 barcode09,sample104,HR
 barcode10,sample105,HR
-barcode11,sample110,LR
+barcode11,sample110,control
 barcode12,sample111,HR
