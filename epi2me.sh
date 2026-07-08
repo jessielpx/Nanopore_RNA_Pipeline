@@ -42,9 +42,7 @@ unset SINGULARITYENV_TMPDIR SINGULARITYENV_NXF_DEBUG SINGULARITYENV_NXF_TASK_WOR
 ulimit -n 4096
 
 
-nextflow run epi2me-labs/wf-transcriptomes \
-  -c epi2me_rorqual.config \
-  -work-dir $SCRATCH/nxf_work/wf_tx_Batch1 \
+nextflow run -c epi2me_rorqual.config -work-dir $SCRATCH/nxf_work/wf_tx_Batch1 epi2me-labs/wf-transcriptomes \
   --fastq /lustre09/project/6070433/shared/Nanopore/Batch1 \
   --sample_sheet /home/yourname/links/projects/rrg-lefranco/yourname/Nanopore/Batch1/samples.csv \
   --ref_genome /cvmfs/ref.mugqic/genomes/species/Homo_sapiens.GRCh38/genome/Homo_sapiens.GRCh38.fa \
