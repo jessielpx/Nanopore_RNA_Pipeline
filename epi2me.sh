@@ -30,16 +30,19 @@ mkdir -p "$NXF_SINGULARITY_CACHEDIR"
 export APPTAINER_CACHEDIR="$NXF_SINGULARITY_CACHEDIR"
 
 # ---- Temp dirs (scratch) ----
-export TMPDIR="$SCRATCH/tmp"
-export APPTAINER_TMPDIR="$SCRATCH/apptainer_tmp"
-export APPTAINERENV_TMPDIR="$SCRATCH/tmp"
-mkdir -p "$TMPDIR" "$APPTAINER_TMPDIR"
+export TMPDIR=/scratch/yourname/tmp
+export APPTAINER_TMPDIR=/scratch/yourname/apptainer_tmp
+export APPTAINERENV_TMPDIR=/scratch/yourname/tmp
+
+mkdir -p /scratch/yourname/tmp
+mkdir -p /scratch/yourname/apptainer_tmp
 
 # ---- Avoid legacy Singularity env injection ----
 unset SINGULARITYENV_TMPDIR SINGULARITYENV_NXF_DEBUG SINGULARITYENV_NXF_TASK_WORKDIR
 
 # ---- Avoid "too many open files" ----
 ulimit -n 4096
+
 
 
 nextflow run -c epi2me_rorqual.config -work-dir $SCRATCH/nxf_work/wf_tx_Batch1 epi2me-labs/wf-transcriptomes \
@@ -51,5 +54,4 @@ nextflow run -c epi2me_rorqual.config -work-dir $SCRATCH/nxf_work/wf_tx_Batch1 e
   --threads "${SLURM_CPUS_PER_TASK}" \
   --cdna_kit SQK-PCS114 \
   --de_analysis \
-  --reference_level LR \
   -resume
