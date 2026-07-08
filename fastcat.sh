@@ -25,9 +25,10 @@ LINES_PER_CHUNK=$((CHUNK_SIZE * 4))
 OUT_ROOT="/lustre09/project/6070433/yourname/Nanopore/Batch1/fastcat_out"
 mkdir -p "$OUT_ROOT"
 
-tail -n +2 "$CSV_FILE" | while IFS=',' read -r BC ALIAS; do
+tail -n +2 "$CSV_FILE" | while IFS=',' read -r BC ALIAS CONDITION || [[ -n "$BC" ]]; do
   BC="${BC//$'\r'/}"
   ALIAS="${ALIAS//$'\r'/}"
+  CONDITION="${CONDITION//$'\r'/}"
 
   if [[ -z "$BC" || -z "$ALIAS" ]]; then
     echo "Skipping invalid line: BC='$BC' ALIAS='$ALIAS'" >&2
