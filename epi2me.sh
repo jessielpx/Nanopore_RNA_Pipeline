@@ -49,5 +49,6 @@ nextflow run -c epi2me_rorqual.config -work-dir $SCRATCH/nxf_work/wf_tx_Batch1 e
   --ref_annotation /home/yourname/links/projects/rrg-lefranco/shared/genes.gtf \
   --out_dir /home/yourname/links/projects/rrg-lefranco/yourname/Nanopore/Batch1/wf_tx_out \
   --threads "${SLURM_CPUS_PER_TASK}" \
-  --cdna_kit SQK-PCS114
+  --cdna_kit SQK-PCS114 \
+  --de_analysis \
   -resume
