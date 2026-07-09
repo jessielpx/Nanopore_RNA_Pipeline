@@ -15,7 +15,7 @@ process merge_transcriptomes {
     gffread -g "${ref_genome}" -w "final_non_redundant_transcriptome.fasta" "stringtie.gtf"
     awk '
       /^>/ {
-        id=$1
+        id=\$1
         sub(/^>/, "", id)
         if (seen[id]++) {skip=1; next}
         skip=0
