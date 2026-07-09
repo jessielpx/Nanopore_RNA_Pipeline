@@ -46,7 +46,6 @@ nextflow run -c epi2me_rorqual.config -work-dir "$SCRATCH/nxf_work/wf_tx_Batch1"
   --sample_sheet /lustre09/project/6070433/yourname/Nanopore/Batch1/samples.csv \
   --ref_genome /lustre09/project/6070433/yourname/reference/Homo_sapiens.GRCh38.fa \
   --ref_annotation /lustre09/project/6070433/shared/genes.gtf \
-  --transcriptome_mode fixed_annotation \
   --out_dir /lustre09/project/6070433/yourname/Nanopore/Batch1/wf_tx_out \
   --threads "${SLURM_CPUS_PER_TASK}" \
   --cdna_kit SQK-PCS114 \
