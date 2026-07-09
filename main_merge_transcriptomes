@@ -1,0 +1,28 @@
+process merge_transcriptomes {
+    // Merge the transcriptomes from all samples
+    label 'isoforms'
+    cpus 2
+    memory "2 GB"
+    input:
+        path "query_annotations/*"
+        path ref_annotation
+        path ref_genome
+    output:
+	path "final_non_redundant_transcriptome.fasta", emit: fasta
+        path "stringtie.gtf", emit: gtf
+    """
+    stringtie --merge -G "${ref_annotation}" -p ${task.cpus} -o stringtie.gtf query_annotations/*
+    gffread -g "${ref_genome}" -w "final_non_redundant_transcriptome.fasta" "stringtie.gtf"
+    awk '
+      /^>/ {
+        id=$1
+        sub(/^>/, "", id)
+        if (seen[id]++) {skip=1; next}
+        skip=0
+      }
+      !skip {print}
+    ' final_non_redundant_transcriptome.fasta > final_non_redundant_transcriptome.dedup.fasta
+
+    mv final_non_redundant_transcriptome.dedup.fasta final_non_redundant_transcriptome.fasta
+    """
+}
