@@ -15,8 +15,7 @@ module load java/21.0.1
 module load nextflow/25.10.2
 module load apptainer/1.4.5
 
-
-export NXF_APPTAINER_OPTS="-B /lustre09/project/6070433/shared/Nanopore/Batch1"
+export NXF_APPTAINER_OPTS="-B /lustre09:/lustre09,/project:/project,/scratch:/scratch"
 export NXF_SINGULARITY_OPTS="$NXF_APPTAINER_OPTS"
 
 # ---- Nextflow behaviour ----
@@ -30,12 +29,11 @@ mkdir -p "$NXF_SINGULARITY_CACHEDIR"
 export APPTAINER_CACHEDIR="$NXF_SINGULARITY_CACHEDIR"
 
 # ---- Temp dirs (scratch) ----
-export TMPDIR=/scratch/yourname/tmp
-export APPTAINER_TMPDIR=/scratch/yourname/apptainer_tmp
-export APPTAINERENV_TMPDIR=/scratch/yourname/tmp
+export TMPDIR="$SCRATCH/tmp"
+export APPTAINER_TMPDIR="$SCRATCH/apptainer_tmp"
+export APPTAINERENV_TMPDIR="$SCRATCH/tmp"
 
-mkdir -p /scratch/yourname/tmp
-mkdir -p /scratch/yourname/apptainer_tmp
+mkdir -p "$TMPDIR" "$APPTAINER_TMPDIR"
 
 # ---- Avoid legacy Singularity env injection ----
 unset SINGULARITYENV_TMPDIR SINGULARITYENV_NXF_DEBUG SINGULARITYENV_NXF_TASK_WORKDIR
@@ -43,14 +41,12 @@ unset SINGULARITYENV_TMPDIR SINGULARITYENV_NXF_DEBUG SINGULARITYENV_NXF_TASK_WOR
 # ---- Avoid "too many open files" ----
 ulimit -n 4096
 
-
-
-nextflow run -c epi2me_rorqual.config -work-dir $SCRATCH/nxf_work/wf_tx_Batch1 epi2me-labs/wf-transcriptomes \
+nextflow run -c epi2me_rorqual.config -work-dir "$SCRATCH/nxf_work/wf_tx_Batch1" epi2me-labs/wf-transcriptomes \
   --fastq /lustre09/project/6070433/shared/Nanopore/Batch1 \
-  --sample_sheet /home/yourname/links/projects/rrg-lefranco/yourname/Nanopore/Batch1/samples.csv \
-  --ref_genome /cvmfs/ref.mugqic/genomes/species/Homo_sapiens.GRCh38/genome/Homo_sapiens.GRCh38.fa \
-  --ref_annotation /home/yourname/links/projects/rrg-lefranco/shared/genes.gtf \
-  --out_dir /home/yourname/links/projects/rrg-lefranco/yourname/Nanopore/Batch1/wf_tx_out \
+  --sample_sheet /lustre09/project/6070433/yourname/Nanopore/Batch1/samples.csv \
+  --ref_genome /lustre09/project/6070433/yourname/reference/Homo_sapiens.GRCh38.fa \
+  --ref_annotation /lustre09/project/6070433/shared/genes.gtf \
+  --out_dir /lustre09/project/6070433/yourname/Nanopore/Batch1/wf_tx_out \
   --threads "${SLURM_CPUS_PER_TASK}" \
   --cdna_kit SQK-PCS114 \
   --de_analysis \
