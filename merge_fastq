@@ -1,0 +1,19 @@
+MERGED_ROOT=/lustre09/project/6070433/yourname/Nanopore/Batch1/merged_fastq
+mkdir -p "$MERGED_ROOT"
+
+CSV=/lustre09/project/6070433/yourname/Nanopore/Batch1/samples.csv
+FASTCAT_ROOT=/lustre09/project/6070433/yourname/Nanopore/Batch1/fastcat_out
+MERGED_ROOT=/lustre09/project/6070433/yourname/Nanopore/Batch1/merged_fastq
+
+tail -n +2 "$CSV" |
+while IFS=',' read -r BC ALIAS CONDITION || [[ -n "$BC" ]]; do
+    BC="${BC//$'\r'/}"
+    ALIAS="${ALIAS//$'\r'/}"
+
+    mkdir -p "$MERGED_ROOT/$BC"
+
+    cat "$FASTCAT_ROOT/$BC"/fastq_chunks/*.fastq.gz \
+      > "$MERGED_ROOT/$BC/${ALIAS}.fastq.gz"
+
+    echo "Merged $BC -> $MERGED_ROOT/$BC/${ALIAS}.fastq.gz"
+done
