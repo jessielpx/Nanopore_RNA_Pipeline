@@ -1,46 +1,44 @@
 process merge_transcriptomes {
     // Merge the transcriptomes from all samples
     label 'isoforms'
-    cpus 2
-    memory "2 GB"
+    cpus 4
+    memory "120 GB"
+
     input:
         path "query_annotations/*"
         path ref_annotation
         path ref_genome
+
     output:
         path "final_non_redundant_transcriptome.fasta", emit: fasta
         path "stringtie.gtf", emit: gtf
+
     """
-    stringtie --merge -G "${ref_annotation}" -p ${task.cpus} -o stringtie.gtf query_annotations/*
-    gffread -g "${ref_genome}" \
+    stringtie --merge \
+      -G "${ref_annotation}" \
+      -p ${task.cpus} \
+      -o stringtie.gtf \
+      query_annotations/*
+
+    gffread \
+      -g "${ref_genome}" \
       -w "final_non_redundant_transcriptome.raw.fasta" \
       "stringtie.gtf"
 
     awk '
-    function write_record() {
-        if (id != "" && seq != "" && !seen[id]++) {
-            print ">" id
-            for (i = 1; i <= length(seq); i += 80) {
-                print substr(seq, i, 80)
-            }
+    /^>/ {
+        id = \$1
+        sub(/^>/, "", id)
+
+        if (seen[id]++) {
+            keep = 0
+        } else {
+            keep = 1
         }
     }
 
-    /^>/ {
-        write_record()
-        id = \$1
-        sub(/^>/, "", id)
-        seq = ""
-        next
-    }
-
-    {
-        gsub(/[[:space:]]/, "", \$0)
-        seq = seq \$0
-    }
-
-    END {
-        write_record()
+    keep {
+        print
     }
     ' final_non_redundant_transcriptome.raw.fasta \
       > final_non_redundant_transcriptome.fasta
