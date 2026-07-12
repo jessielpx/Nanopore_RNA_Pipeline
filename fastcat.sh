@@ -19,7 +19,7 @@ IMG_PATH="/scratch/yourname/ontresearch-wf-common-sha72f3517dd994984e0e2da0b97cb
 BASE_INPUT="/lustre09/project/6070433/shared/Nanopore_Data/batch1-8"
 CSV_FILE="/lustre09/project/6070433/yourname/Nanopore/Batch1/samples.csv"
 
-CHUNK_SIZE=1000000
+CHUNK_SIZE=0
 LINES_PER_CHUNK=$((CHUNK_SIZE * 4))
 
 OUT_ROOT="/lustre09/project/6070433/yourname/Nanopore/Batch1/fastcat_out"
