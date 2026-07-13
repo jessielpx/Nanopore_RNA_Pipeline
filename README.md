@@ -37,6 +37,7 @@ It is not the most efficient way to run it, but it does work. Please help modify
 2. Always use the **real path** of the folder, to check real path, run **pwd -P** or **realpath .**
 3. Have a [samples.csv](samples.csv) in the work folder, the .csv file needs to be comma-delimited
 4. Have a [configuration file](epi2me_rorqual.config) in the work folder
+5. Reference genome: /cvmfs/soft.mugqic/CentOS6/genomes/species/Homo_sapiens.GRCh38/genome/Homo_sapiens.GRCh38.fa
 
 ## 1. Run PycoQC for quality check:
 1. sbatch [PycoQC_batch1.sh](PycoQC_batch1.sh)
