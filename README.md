@@ -82,7 +82,7 @@ _**Issue**: The EPI2ME workflow assumes a **Singularity**-based container enviro
 
 ---
 ```
-*input_directory
+input_directory
 ├── barcode01
 │   ├── reads0.fastq
 │   └── reads1.fastq
@@ -91,7 +91,7 @@ _**Issue**: The EPI2ME workflow assumes a **Singularity**-based container enviro
 │   ├── reads1.fastq
 │   └── reads2.fastq
 └── barcode03
-    └── reads0.fastq*
+    └── reads0.fastq
 ```
 ---
 
