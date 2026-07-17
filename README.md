@@ -72,13 +72,16 @@ _**Issue**: The EPI2ME workflow assumes a **Singularity**-based container enviro
 
 ## To be continued...
 
+
+
+
 ## Running EPI2ME v1.7.2 in 1 step
 1.	Copy singularity folder into ~/links/scratch
 2.	Prepare samples.csv
 3.	Organize fastq files such that they are in a single folder in which they are separated by unique barcodes:
 
 ---
-
+```
 *input_directory
 ├── barcode01
 │   ├── reads0.fastq
@@ -89,7 +92,7 @@ _**Issue**: The EPI2ME workflow assumes a **Singularity**-based container enviro
 │   └── reads2.fastq
 └── barcode03
     └── reads0.fastq*
-    
+```
 ---
 
 4.
@@ -102,12 +105,11 @@ cd ~/links/scratch
 •	Email address
 •	Location of fastq files
 •	Reference
-•	SampleMetaData
+•	Samples.csv
 •	Out_dir
-•	Remove --transcriptome_source precomputed to use ref genome-based approach (not tested for given reference so might have to change)
+•	Remove --transcriptome_source precomputed to use default reference genome-based approach (not tested for given reference)
 
-7. Create ~/.nextflow/assets/epi2me-labs/wf-transcriptomes using follow commands:
-   
+7. Create ~/.nextflow/assets/epi2me-labs/wf-transcriptomes:
 ```
 module load nextflow/24.10.2
 nextflow pull epi2me-labs/wf-transcriptomes -r v1.7.2
@@ -117,13 +119,13 @@ nextflow pull epi2me-labs/wf-transcriptomes -r v1.7.2
 sbatch EPI2ME_Transcriptomes_v1.7.2.sh
 ```
 
-### Troubleshooting
+## Troubleshooting
 
-## Error due to image error:
-12.	Copy paste “pull …” and rename to end with .img (remove ending)
-13.	Move .img file into singularity
-14.	Repeat from step 8 by adding -resume to the script.
+Error due to image error:
+1. Copy paste “pull …” and rename to end with .img (remove ending)
+2. Move .img file into singularity
+3. Add -resume and rerun EPI2ME_Transcriptomes_v1.7.2.sh script.
 
-## Error due to time/memory requirements:
-15.	Modify process.X
+Error due to time/memory requirements:
+1. Modify process.X
 
