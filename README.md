@@ -76,9 +76,8 @@ _**Issue**: The EPI2ME workflow assumes a **Singularity**-based container enviro
 
 
 ## Running EPI2ME v1.7.2 in 1 step
-1.	Copy singularity folder into ~/links/scratch
-2.	Prepare samples.csv
-3.	Organize fastq files such that they are in a single folder in which they are separated by unique barcodes:
+1.	Prepare samples.csv
+2.	Organize fastq files such that they are in a single folder in which they are separated by unique barcodes:
 
 ---
 ```
@@ -95,11 +94,23 @@ input_directory
 ```
 ---
 
-4.
+3.
 ```
 cd ~/links/scratch
 ```
+4. Create singularity directory:
+```
+mkdir -p ~/links/scratch/singularity
+module load apptainer/1.4.5
 
+singularity pull \
+~/links/scratch/singularity/ontresearch-wf-common-sha72f3517dd994984e0e2da0b97cb3f23f8540be4b.img \
+docker://ontresearch/wf-common:sha72f3517dd994984e0e2da0b97cb3f23f8540be4b
+
+singularity pull \
+~/links/scratch/singularity/ontresearch-wf-transcriptomes-shaaaf20a5a0e76f9e18bad21af639a6b69e4a31a2f.img \
+docker://ontresearch/wf-transcriptomes:shaaaf20a5a0e76f9e18bad21af639a6b69e4a31a2f
+```
 5.	Copy EPI2ME_Transcriptomes_v1.7.2.sh into ~/links/scratch
 6.	Modify EPI2ME_Transcriptomes_v1.7.2.sh script :
 * Email address
