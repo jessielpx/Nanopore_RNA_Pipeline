@@ -109,9 +109,9 @@ cd ~/links/scratch
 * Out_dir
 * Remove --transcriptome_source precomputed to use default reference genome-based approach (not tested for given reference)
 
-*Note: Make sure to change 'yourname' fields with your compute canada username.*
+            *Note: Make sure to change 'yourname' fields with your compute canada username.*
 
-8. Create ~/.nextflow/assets/epi2me-labs/wf-transcriptomes:
+7. Create ~/.nextflow/assets/epi2me-labs/wf-transcriptomes:
 ```
 module load nextflow/24.10.2
 nextflow pull epi2me-labs/wf-transcriptomes -r v1.7.2
